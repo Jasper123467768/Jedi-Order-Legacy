@@ -429,6 +429,103 @@
         </article>
       </div>
     </section>
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Jedi Order Legacy</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+<style>
+  /* --- EXISTING STYLES ABOVE THIS COMMENT --- */
+
+  /* Loading Screen */
+  #loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #001628 0%, #000c1a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1.5s ease, visibility 1.5s ease;
+  }
+
+  #loading-screen h1 {
+    font-size: 3rem;
+    color: #00bfff;
+    text-shadow:
+      0 0 10px #00bfff,
+      0 0 20px #00bfff,
+      0 0 40px #00ffff;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.05); }
+  }
+
+  .fadeout {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <h1>Jedi Order Legacy</h1>
+</div>
+
+<!-- Main Content Container -->
+<div id="container" role="main">
+  <!-- EXISTING HTML CONTENT CONTINUES -->
+</div>
+
+<script>
+  // Loading screen fadeout after 4 seconds
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loading = document.getElementById('loading-screen');
+      if (loading) {
+        loading.classList.add('fadeout');
+      }
+    }, 4000);
+  });
+
+  // Tab navigation logic
+  const tabs = document.querySelectorAll('nav button[role="tab"]');
+  const sections = document.querySelectorAll('.rank-section');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      sections.forEach(s => s.classList.remove('active'));
+
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      const targetId = tab.getAttribute('aria-controls');
+      const targetSection = document.getElementById(targetId);
+      if(targetSection) {
+        targetSection.classList.add('active');
+        targetSection.focus();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+
 
     <!-- Low Ranks -->
     <section id="low-ranks" class="rank-section" role="tabpanel" aria-labelledby="tab-low" tabindex="0">
